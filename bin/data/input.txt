@@ -9,4 +9,4 @@ D F 1
 F E 5
 -1
 from A
-to B
+to F
