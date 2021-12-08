@@ -102,6 +102,7 @@ public class Render extends JFrame
 		});
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	private static mxGraph buildGraph(String filename) throws NumberFormatException, IOException {
 		mxGraph graph = new mxGraph();
         Object parent = graph.getDefaultParent();
@@ -119,6 +120,10 @@ public class Render extends JFrame
         try
         {
 			System.out.println("PAHT:" +shortestPath);
+			HashMap<String, String> shortestHM = new HashMap<String, String>();
+			for (int i = 0; i < shortestPath.size()-1; i++) {
+				shortestHM.put(shortestPath.get(i).toString(), shortestPath.get(i+1).toString());
+			}
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
 			listNodes = new ArrayList<>();
 			hm = new HashMap<>();
@@ -130,7 +135,6 @@ public class Render extends JFrame
 			String line;
 			Object v;
 			arrV = new Object[vertices];
-			int i = 0; // counter used to add vertices to map array
 			while (!(line = br.readLine()).equals("-1")) {
 				String[] tokens = line.split("\\s+");
 				System.out.println("XÉT " + line);
@@ -141,17 +145,33 @@ public class Render extends JFrame
 				}
 
 				if (!listNodes.contains(tokens[1])) {
-
-						v = graph.insertVertex(parent, null, tokens[1], 240, 150, 50, 50, "ROUNDED");
-						hm.put(tokens[1], v);
-						graph.insertEdge(parent, null, tokens[2], hm.get(tokens[0]), hm.get(tokens[1]));
+					v = graph.insertVertex(parent, null, tokens[1], 240, 150, 50, 50, "ROUNDED");
+					hm.put(tokens[1], v);
+					listNodes.add(tokens[1]);
 					
-						listNodes.add(tokens[1]);
-						
+						if (shortestHM.containsKey(tokens[0]) && shortestHM.get(tokens[0]).equals(tokens[1])) {
+							
+							graph.insertEdge(parent, null, tokens[2], hm.get(tokens[0]), hm.get(tokens[1]),"defaultEdge;strokeColor=red");
+						} else {
+							graph.insertEdge(parent, null, tokens[2], hm.get(tokens[0]), hm.get(tokens[1]));
+						}
 
 				} else {
+					if (shortestHM.containsKey(tokens[0]) && shortestHM.get(tokens[0]).equals(tokens[1])) {
+						
+						graph.insertEdge(parent, null, tokens[2], hm.get(tokens[0]), hm.get(tokens[1]),"defaultEdge;strokeColor=red");
+					} else {
+						graph.insertEdge(parent, null, tokens[2], hm.get(tokens[0]), hm.get(tokens[1]));
+					}
 					
-					graph.insertEdge(parent, null, tokens[2], hm.get(tokens[0]), hm.get(tokens[1]));
+//					for (int i = 0; i < shortestPath.size()-1; i++) {
+//						System.out.println("shortest: " + i + shortestPath.get(i) + shortestPath.get(i+1));
+//						if (tokens[0].equals(shortestPath.get(i)) && tokens[1].equals(shortestPath.get(i+1))) {
+//							graph.insertEdge(parent, null, tokens[2], hm.get(tokens[0]), hm.get(tokens[1]), "strokeColor=red" );
+//						} else {
+//							graph.insertEdge(parent, null, tokens[2], hm.get(tokens[0]), hm.get(tokens[1]));
+//						}
+//					}	
 					
 				}
 
