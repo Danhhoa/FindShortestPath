@@ -15,7 +15,7 @@ public class Edge extends DefaultWeightedEdge {
 	public void setTargetVertex(Vertex targetVertex) {
 		this.targetVertex = targetVertex;
 	}
-	public double getWeight() {
+	public double getEdgeWeight() {
 		return weight;
 	}
 	public void setWeight(double weight) {

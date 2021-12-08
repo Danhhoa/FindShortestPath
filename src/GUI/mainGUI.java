@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import dijkstra.App;
+import dijkstra.Map;
+import dijkstra.Render;
 import dijkstra.RenderMap;
 
 import javax.swing.JDesktopPane;
@@ -19,6 +21,7 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.awt.event.ActionEvent;
@@ -98,10 +101,29 @@ public class mainGUI extends JFrame {
 												lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 												lblNewLabel.setBounds(10, 28, 376, 35);
 												panel_1.add(lblNewLabel);
+												
+												JButton btnStartDraw = new JButton("Xem đồ thị");
+												btnStartDraw.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent e) {
+														try {
+															Render.startDraw(filename);
+//															Map.startDraw(filename);
+														} catch (NumberFormatException e1) {
+															// TODO Auto-generated catch block
+															e1.printStackTrace();
+														}
+													}
+												});
+												btnStartDraw.setBounds(321, 202, 129, 23);
+												panel_1.add(btnStartDraw);
 												btnStartFindPath.addActionListener(new ActionListener() {
 													public void actionPerformed(ActionEvent e) {
-														App.startDijkstra(filename);
-														RenderMap.startDraw(filename);
+														
+												
+															App.startDijkstra(filename);
+															
+														
+														
 													}
 												});
 										
@@ -129,20 +151,4 @@ public class mainGUI extends JFrame {
 					}
 				});
 	}
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					mainGUI frame = new mainGUI();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 }

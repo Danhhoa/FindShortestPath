@@ -1,13 +1,15 @@
 package dijkstra;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-public class Vertex implements Comparable<Vertex> {
+public class Vertex  implements Comparable<Vertex> {
 	private boolean visited;
 	private String name;
 	public ArrayList<Edge> connections; // canh ke
 	public double minDistance = Double.POSITIVE_INFINITY;
 	public Vertex previous;
+	public Color color;
 
 	public Vertex(String name) {
 		this.name = name;
