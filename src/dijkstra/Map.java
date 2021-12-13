@@ -145,8 +145,6 @@ public class Map {
 				if (!contains(tokens[0])) {
 					// if vertex doesn't exist in map, add it
 					map[i] = new Vertex(tokens[0]);
-					
-						g.addVertex(map[i]);
 						listVertAdded.add(tokens[0]);
 					// add an edge to new vertex
 					Vertex edge = getVertexWithName(tokens[1]);
@@ -162,16 +160,12 @@ public class Map {
 						
 						// add each vertex to map
 						map[i].addNeighbour(new Edge(newEdge, Double.valueOf(tokens[2])));
-							g.addVertex(newEdge);
-							 e = g.addEdge(map[i], newEdge);
-							g.setEdgeWeight(map[i], newEdge, Double.valueOf(tokens[2]));
 							listVertAdded.add(tokens[1]);
 							
 	
 					} else {
 						map[i].addNeighbour(new Edge(edge, Double.valueOf(tokens[2])));
-						e = g.addEdge(map[i], edge);
-						g.setEdgeWeight(map[i], edge, Double.valueOf(tokens[2]));
+					
 					}
 					// increment i only after vertex is done being added to map
 					i++;
@@ -190,18 +184,11 @@ public class Map {
 						vertex.addNeighbour(new Edge(newEdge, Double.valueOf(tokens[2])));
 						
 						if (newEdge != null) {
-							g.addVertex(newEdge);
-							 e = g.addEdge(vertex, newEdge);
-							g.setEdgeWeight(vertex, newEdge, Double.valueOf(tokens[2]));
-							 
 							listVertAdded.add(tokens[1]);
 						}
 
 					} else {
 						vertex.addNeighbour(new Edge(edge, Double.valueOf(tokens[2])));
-						
-						 e = g.addEdge(vertex, edge);
-						g.setEdgeWeight(vertex, edge, Double.valueOf(tokens[2]));
 						
 					}
 				}
@@ -225,10 +212,6 @@ public class Map {
 						+ " vertices in the map. Please check map file line 1 and try again.");
 				return null;
 			}
-		}
-		
-		for (String s : listVertAdded) {
-			System.out.println("ADD " +s);
 		}
 		return map;
 	}

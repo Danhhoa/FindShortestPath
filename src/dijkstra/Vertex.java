@@ -9,7 +9,6 @@ public class Vertex  implements Comparable<Vertex> {
 	public ArrayList<Edge> connections; // canh ke
 	public double minDistance = Double.POSITIVE_INFINITY;
 	public Vertex previous;
-	public Color color;
 
 	public Vertex(String name) {
 		this.name = name;

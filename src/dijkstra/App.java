@@ -26,6 +26,7 @@ import dijkstra.Map.MyEdge;
 public class App {
 	
 	public static List<Vertex> path;
+	public static double cost;
 	public static void startDijkstra(String filename) {
 		HashMap<String, String> direction = new HashMap<>();
 		ArrayList<String> listDir = new ArrayList<String>();
@@ -36,9 +37,11 @@ public class App {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
 			while ((line = br.readLine()) != null) {
 				if (line.equals("-1")) {
-					while ((next = br.readLine()) != null) {
+					next = br.readLine();
+					while (next != null && next != " ") {
 							dir = next.split(" ");
 							direction.put(dir[0], dir[1]);
+							next = br.readLine();
 					}
 					for (String i : direction.keySet()) {
 						if (i.equalsIgnoreCase("from")) {
@@ -65,12 +68,6 @@ public class App {
         setFrom = listDir.get(0);
         setTo = listDir.get(1);
         if (map.map != null) {
-       		for (Vertex d : map.map) {
-			if (d!=null) {
-				System.out.println("Map: " +d.toString());
-			}
-			else System.err.println("NULL: " +d);
-		}
             Vertex start = map.getVertexWithName(setFrom);
 
             Vertex end = map.getVertexWithName(setTo);
@@ -88,6 +85,8 @@ public class App {
                 return;
             }
             Dijkstra.computePaths(start); // run Dijkstra
+            cost = end.minDistance;
+            System.out.println(cost);
     		System.out.println("Distance to " + end + ": " + end.minDistance);
     		 path = Dijkstra.getShortestPathTo(end);
              System.out.println("Path: " + path);
@@ -95,17 +94,17 @@ public class App {
 	}
 	}
 
-	public static void main(String[] args) throws FileNotFoundException {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					mainGUI frame = new mainGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) throws FileNotFoundException {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					mainGUI frame = new mainGUI();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	}
 	
