@@ -49,6 +49,10 @@ public class mainGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	void initGui() {
+		
+	}
+	
 	public mainGUI() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,11 +95,11 @@ public class mainGUI extends JFrame {
 										panel_1.setLayout(null);
 								
 										JButton btnOpenFile = new JButton("Open file...");
-										btnOpenFile.setBounds(10, 108, 87, 23);
+										btnOpenFile.setBounds(10, 108, 113, 23);
 										panel_1.add(btnOpenFile);
 										
 												JLabel messageLabel = new JLabel("New label");
-												messageLabel.setBounds(133, 108, 253, 23);
+												messageLabel.setBounds(133, 108, 371, 23);
 												panel_1.add(messageLabel);
 												
 												JButton btnStartFindPath = new JButton("Start find path");
@@ -140,10 +144,6 @@ public class mainGUI extends JFrame {
 															messageLabel.setText("hãy chọn file cần thực hiện");
 													}
 												});
-								
-								JPanel panel_2 = new JPanel();
-								tabbedPane.addTab("Lập lịch CPU", null, panel_2, null);
-										panel_2.setLayout(null);
 				btnScheduleCPU.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
